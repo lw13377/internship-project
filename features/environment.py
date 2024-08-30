@@ -17,13 +17,13 @@ def browser_init(context):
     # service = Service(ChromeDriverManager().install())
     # context.driver = webdriver.Chrome(service=service, options=options)
 
-    driver_path = './chromedriver' # for macOS users
-    service = Service(driver_path)
-    context.driver = webdriver.Chrome(service=service)
-
-    # driver_path = GeckoDriverManager().install()
+    # driver_path = './chromedriver' # for macOS users
     # service = Service(driver_path)
-    # context.driver = webdriver.Firefox(service=service)
+    # context.driver = webdriver.Chrome(service=service)
+
+    driver_path = GeckoDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Firefox(service=service)
 
     context.driver.maximize_window()
     context.driver.implicitly_wait(4)
