@@ -34,13 +34,16 @@ def verify_offplan(context):
     context.app.main_page.verify_offplan_opened()
 
 
+
 @then('Go to the final page using the pagination button')
 def click_on_next_page(context):
     for i in range(51):
+        context.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         context.app.main_page.next_page()
 
 
 @then('Go back to the first page using the pagination button')
 def click_on_prev_page(context):
     for i in range(51):
+        context.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         context.app.main_page.previous_page()
