@@ -7,6 +7,9 @@ class MainPage(Page):
     NEXT_PAGE = (By.CSS_SELECTOR, "[wized='nextPageProperties']")
     PREVIOUS_PAGE = (By.CSS_SELECTOR, "[wized='previousPageProperties']")
     VERIFY_OFFPLAN = (By.XPATH, "//a[contains(text(), 'Off-plan')]")
+    SEARCH_INPUT = (By.ID, "searchInput")
+    TEXT_VERIFY = By.CSS_SELECTOR, "[class='project-name']"
+
 
 
     def off_plan(self):
@@ -20,3 +23,11 @@ class MainPage(Page):
 
     def verify_offplan_opened(self):
         self.wait_for_element_appear(*self.VERIFY_OFFPLAN)
+
+    def search_word(self, word):
+        self.input_text(word, *self.SEARCH_INPUT)
+
+    def verify_search_word(self, word):
+        self.verify_partial_text(word,*self.TEXT_VERIFY)
+
+
