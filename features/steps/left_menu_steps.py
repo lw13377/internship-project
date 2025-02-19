@@ -47,3 +47,12 @@ def click_on_prev_page(context):
     for i in range(51):
         context.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
         context.app.main_page.previous_page()
+
+@then('Filter by sale status of “Announced”.')
+def filter_announced(context):
+    context.app.main_page.filter_announced()
+
+
+@then('Verify each product contains the Announced tag.')
+def verify_announced(context):
+    context.app.main_page.verify_announced()

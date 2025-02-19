@@ -17,7 +17,8 @@ class MainPage(Page):
     PRICE = By.CSS_SELECTOR, "[class='price-class']"
     SALES_FILTER = By.ID, "Location-2"
     OUT_OF_STOCK = By.CSS_SELECTOR, "option[value='Out of stock']"
-    OUT_OF_STOCK_VERIFY = By.CSS_SELECTOR, "[wized='projectStatus']"
+    ANNOUNCED = By.CSS_SELECTOR, "option[value='Announced']"
+    STATUS_VERIFY = By.CSS_SELECTOR, "[wized='projectStatus']"
 
 
     def off_plan(self):
@@ -58,10 +59,22 @@ class MainPage(Page):
 
     def verify_out_of_stock_tag(self):
         sleep(10)
-        product_status = self.driver.find_elements(*self.OUT_OF_STOCK_VERIFY)
+        product_status = self.driver.find_elements(*self.STATUS_VERIFY)
         for status in product_status:
             tag_text = status.text
             assert "Out of stock" in tag_text, f"Product missing 'Out of stock' tag: {tag_text}"
+
+    def filter_announced(self):
+        self.click(*self.SALES_FILTER)
+        self.wait_and_click(*self.ANNOUNCED)
+
+    def verify_announced(self):
+        sleep(10)
+        product_status = self.driver.find_elements(*self.STATUS_VERIFY)
+        for status in product_status:
+            tag_text = status.text
+            assert "Announced" in tag_text, f"Product missing 'Announced' tag: {tag_text}"
+
 
 
 
