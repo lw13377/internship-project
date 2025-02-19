@@ -1,5 +1,6 @@
 from pages.base_page import Page
 from selenium.webdriver.common.by import By
+from time import sleep
 
 class MainPage(Page):
 
@@ -14,6 +15,9 @@ class MainPage(Page):
     MAX_RANGE = By.CSS_SELECTOR, "[wized='unitPriceToFilter']"
     APPLY_FILTER = By.CSS_SELECTOR, "[wized='applyFilterButton']"
     PRICE = By.CSS_SELECTOR, "[class='price-class']"
+    SALES_FILTER = By.ID, "Location-2"
+    OUT_OF_STOCK = By.CSS_SELECTOR, "option[value='Out of stock']"
+    OUT_OF_STOCK_VERIFY = By.CSS_SELECTOR, "[wized='projectStatus']"
 
 
     def off_plan(self):
@@ -48,6 +52,16 @@ class MainPage(Page):
         for price in prices:
             assert 1200000 <= price <= 2000000, f"Price {price} is out of range!"
 
+    def filter_out_stock(self):
+        self.click(*self.SALES_FILTER)
+        self.wait_and_click(*self.OUT_OF_STOCK)
+
+    def verify_out_of_stock_tag(self):
+        sleep(10)
+        product_status = self.driver.find_elements(*self.OUT_OF_STOCK_VERIFY)
+        for status in product_status:
+            tag_text = status.text
+            assert "Out of stock" in tag_text, f"Product missing 'Out of stock' tag: {tag_text}"
 
 
 
