@@ -18,3 +18,15 @@ def verify_12_options(context):
 @then("Verify that connect the company button is available")
 def verify_connect_button(context):
     context.app.settings_page.connect_the_company()
+
+@then('Click on Verification')
+def click_verification(context):
+    context.app.settings_page.verification()
+
+@then('Verify verification page opens')
+def verify_verification(context):
+    context.app.settings_page.verify_verification()
+
+@then('Verify upload image and next step')
+def verify_upload_image(context):
+    context.app.settings_page.verify_photo_next_step()
