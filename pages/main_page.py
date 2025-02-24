@@ -23,7 +23,8 @@ class MainPage(Page):
     CLICK_MARKET = By.CSS_SELECTOR, "a[href='/market-companies']"
     ADD_COMPANY = By.CSS_SELECTOR, "[class='add-company-button w-inline-block']"
     PUBLISH = By.CSS_SELECTOR, "[class='publish-button _1 w-button']"
-
+    VIEW_TEMPLATE = By.CSS_SELECTOR, "[class='publish-button color w-button']"
+    SEND_CV = By.CSS_SELECTOR, "[class='button-agency w-button']"
 
     def off_plan(self):
         self.click(*self.OFF_PLAN)
@@ -98,11 +99,13 @@ class MainPage(Page):
     def verify_publish_company(self):
         self.wait_until_clickable(*self.PUBLISH)
 
-    # def wait_until_clickable(self, *PUBLISH):
-    #     self.wait.until(
-    #         EC.element_to_be_clickable(*PUBLISH),
-    #         message=f'Element by locator {PUBLISH} not clickable'
-    #     )
+    def view_template(self):
+        self.click(*self.VIEW_TEMPLATE)
+
+    def verify_send_cv(self):
+        self.wait_for_element_appear(*self.SEND_CV)
+
+
 
 
 

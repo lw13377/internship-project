@@ -78,4 +78,10 @@ def verify_add_company(context):
 def verify_publish_company(context):
     context.app.main_page.verify_publish_company()
 
+@then('Scroll down and click on the button “View Page Template”')
+def view_template(context):
+    context.app.main_page.view_template()
+@then('Verify the button “Send my CV” button is available.')
+def send_cv(context):
+    context.app.main_page.verify_send_cv()
 
