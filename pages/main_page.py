@@ -1,6 +1,7 @@
 from pages.base_page import Page
 from selenium.webdriver.common.by import By
 from time import sleep
+from selenium.webdriver.support import expected_conditions as EC
 
 class MainPage(Page):
 
@@ -19,6 +20,9 @@ class MainPage(Page):
     OUT_OF_STOCK = By.CSS_SELECTOR, "option[value='Out of stock']"
     ANNOUNCED = By.CSS_SELECTOR, "option[value='Announced']"
     STATUS_VERIFY = By.CSS_SELECTOR, "[wized='projectStatus']"
+    CLICK_MARKET = By.CSS_SELECTOR, "a[href='/market-companies']"
+    ADD_COMPANY = By.CSS_SELECTOR, "[class='add-company-button w-inline-block']"
+    PUBLISH = By.CSS_SELECTOR, "[class='publish-button _1 w-button']"
 
 
     def off_plan(self):
@@ -74,6 +78,37 @@ class MainPage(Page):
         for status in product_status:
             tag_text = status.text
             assert "Announced" in tag_text, f"Product missing 'Announced' tag: {tag_text}"
+
+    def market(self):
+        self.wait_and_click(*self.CLICK_MARKET)
+
+    def verify_market(self):
+        expected_url = 'https://soft.reelly.io/market-companies'
+        actual_url = self.driver.current_url
+        assert expected_url == actual_url, f'Expected {expected_url} but got {actual_url}'
+
+    def add_company(self):
+        self.click(*self.ADD_COMPANY)
+
+    def verify_add_company(self):
+        expected_url = 'https://soft.reelly.io/presentation-for-the-agency'
+        actual_url = self.driver.current_url
+        assert expected_url == actual_url, f'Expected {expected_url} but got {actual_url}'
+
+    def verify_publish_company(self):
+        self.wait_until_clickable(*self.PUBLISH)
+
+    # def wait_until_clickable(self, *PUBLISH):
+    #     self.wait.until(
+    #         EC.element_to_be_clickable(*PUBLISH),
+    #         message=f'Element by locator {PUBLISH} not clickable'
+    #     )
+
+
+
+
+
+
 
 
 

@@ -56,3 +56,26 @@ def filter_announced(context):
 @then('Verify each product contains the Announced tag.')
 def verify_announced(context):
     context.app.main_page.verify_announced()
+
+
+@when('Click on market')
+def click_market(context):
+    context.app.main_page.market()
+
+@then('Verify the market page opens.')
+def verify_market(context):
+    context.app.main_page.verify_market()
+
+@then('Click on “Add Company” button.')
+def click_add_company(context):
+    context.app.main_page.add_company()
+
+@then('Verify the right page opens.')
+def verify_add_company(context):
+    context.app.main_page.verify_add_company()
+
+@when('Verify the button “Publish my company” is available.')
+def verify_publish_company(context):
+    context.app.main_page.verify_publish_company()
+
+
