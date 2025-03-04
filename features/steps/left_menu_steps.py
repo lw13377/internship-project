@@ -85,3 +85,14 @@ def view_template(context):
 def send_cv(context):
     context.app.main_page.verify_send_cv()
 
+@when('Filter by sale status to presale')
+def filter_presale(context):
+    context.app.main_page.filter_presale()
+
+@then('Verify each product contains the presale tag')
+def verify_presale(context):
+    context.app.main_page.verify_presale_tag()
+
+
+
+

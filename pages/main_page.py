@@ -19,6 +19,7 @@ class MainPage(Page):
     SALES_FILTER = By.ID, "Location-2"
     OUT_OF_STOCK = By.CSS_SELECTOR, "option[value='Out of stock']"
     ANNOUNCED = By.CSS_SELECTOR, "option[value='Announced']"
+    PRESALE = By.CSS_SELECTOR, "option[value='Presale(EOI)']"
     STATUS_VERIFY = By.CSS_SELECTOR, "[wized='projectStatus']"
     CLICK_MARKET = By.CSS_SELECTOR, "a[href='/market-companies']"
     ADD_COMPANY = By.CSS_SELECTOR, "[class='add-company-button w-inline-block']"
@@ -68,6 +69,18 @@ class MainPage(Page):
         for status in product_status:
             tag_text = status.text
             assert "Out of stock" in tag_text, f"Product missing 'Out of stock' tag: {tag_text}"
+
+
+    def filter_presale(self):
+        self.click(*self.SALES_FILTER)
+        self.wait_and_click(*self.PRESALE)
+
+    def verify_presale_tag(self):
+        sleep(10)
+        product_status = self.driver.find_elements(*self.STATUS_VERIFY)
+        for status in product_status:
+            tag_text = status.text
+            assert "Presale(EOI)" in tag_text, f"Product missing 'Presale(EOI)' tag: {tag_text}"
 
     def filter_announced(self):
         self.click(*self.SALES_FILTER)

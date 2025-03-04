@@ -43,3 +43,13 @@ Feature: Testing from left meny bar
     Then Verify the right page opens.
     Then Scroll down and click on the button “View Page Template”
     And Verify the button “Send my CV” button is available.
+
+    Scenario: filter presale
+    Given Open sign in page
+    And Type in Email
+    Then Type in Password
+    Then Log in to the page
+    And Click on off plan option at the left side menu
+    When Verify the right page opens
+    And Filter by sale status to presale
+    Then Verify each product contains the presale tag
